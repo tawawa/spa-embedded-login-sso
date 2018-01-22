@@ -26,7 +26,6 @@ function checkSession () {
   auth0WebAuth.checkSession({
     responseType: 'token id_token',
     scope: 'openid profile email',
-    audience: 'https://' + AUTH0_DOMAIN + '/userinfo',
     connection: AUTH0_CONNECTION,
     redirectUri: 'http://app1.com:3000/callback.html',
     timeout: 5000,
@@ -56,7 +55,6 @@ $(function () {
       realm: AUTH0_CONNECTION,
       username: $('#email').val(),
       password: $('#password').val(),
-      audience: 'https://' + AUTH0_DOMAIN + '/userinfo',
       redirectUri: 'http://app1.com:3000',
       sso: true,
       scope: 'openid profile email'

@@ -10,6 +10,6 @@ const auth0WebAuth = new auth0.WebAuth({
   domain: AUTH0_DOMAIN,
   clientID: AUTH0_CLIENT_ID,
   responseType: 'token',
-  audience: `https://${AUTH0_DOMAIN}/userinfo`,
+  audience: 'https://' + AUTH0_DOMAIN + '/api/v2/',
   scope: 'openid profile email'
 });

@@ -23,12 +23,12 @@ function saveAuthResult (result) {
 }
 
 function checkSession () {
-  auth0js.checkSession({
+  auth0WebAuth.checkSession({
     responseType: 'token id_token',
     scope: 'openid profile email',
     audience: 'https://' + AUTH0_DOMAIN + '/userinfo',
     connection: AUTH0_CONNECTION,
-    redirectUri: 'http://localhost:3000/callback.html',
+    redirectUri: 'http://app1.com:3000/callback.html',
     timeout: 5000,
     usePostMessage: true
   }, function (err, result) {
@@ -41,7 +41,7 @@ function checkSession () {
   });
 }
 
-auth0js.parseHash(window.location.hash, function (err, result) {
+auth0WebAuth.parseHash(window.location.hash, function (err, result) {
   if (err) {
     console.error(err);
   } else if (result) {
@@ -52,10 +52,12 @@ auth0js.parseHash(window.location.hash, function (err, result) {
 $(function () {
   $('#signin').hide();
   $('#signin-db').on('click', function () {
-    auth0Instance.login({
+    auth0WebAuth.login({
       realm: AUTH0_CONNECTION,
       username: $('#email').val(),
       password: $('#password').val(),
+      audience: 'https://' + AUTH0_DOMAIN + '/userinfo',
+      redirectUri: 'http://app1.com:3000',
       sso: true,
       scope: 'openid profile email'
     }, function (err) {
